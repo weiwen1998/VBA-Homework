@@ -23,7 +23,7 @@ OpenPrice = True
 
 If ws.Cells(i + 1, 1).Value = ws.Cells(i, 1).Value And OpenPrice = True Then
 
-OpenP = ws.Cells(i, 3)
+OpenP = ws.Cells(2, 3)
 
 OpenPrice = False
 
@@ -42,17 +42,3 @@ ws.Range("L" & Summary_Table_Row).Value = Stock_Vol
 Summary_Table_Row = Summary_Table_Row + 1
 
 Stock_Vol = 0
-
-Else
-Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
-
-End If
-
-Change = CloseP = OpenP
-
-Next i
-
-Next ws
-
-End Sub
-
