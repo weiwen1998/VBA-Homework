@@ -1,32 +1,55 @@
+Sub tester()
+
 For Each ws In Worksheets
 
-Dim WorksheetName As String
-
 Dim Ticker As String
+Dim Stock_Vol As LongLong
+Dim Change As Double
+Dim PercentChange As Double
 
-Dim StockVol As LongLong
-Stock_Vol = 0
+StockVolume = 0
+Change = 0
+PercentChange = 0
+
+ws.Range("I1").Value = "Ticker"
+ws.Range("J1").Value = "Yearly Change"
+ws.Range("K1").Value = "Percent Change"
+ws.Range("L1").Value = "Stock Volume"
 
 Dim Summary_Table_Row As Integer
+
+Dim OpenPrice As Boolean
+
+OpenPrice = True
+
 Summary_Table_Row = 2
 
-lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
-
+lastrow = ws.Cells(Rows.Count, "A").End(xlUp).Row
 
 For i = 2 To lastrow
 
-If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
-Ticker = ws.Cells(i, 1).Value
-Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
-ws.Range("I" & Summary_Table_Row).Value = Ticker
-ws.Range("J" & Summary_Table_Row).Value = Stock_Vol
+If Cells(i + 1, 1).Value = Cells(i, 1).Value Then
+OpenPrice = ws.Cells(i, 3)
+OpenPrice = False
+OpenPrice = OpenPrice + 1
 
+ElseIf Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+Ticker = ws.Cells(i, 1).Value
+Change = (ws.Cells(i, 6) - OpenPrice)
+
+Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
+
+
+ws.Range("I" & Summary_Table_Row).Value = Ticker
+ws.Range("J" & Summary_Table_Row).Value = Change
+ws.Range("K" & Summary_Table_Row).Value = PercentChange
+ws.Range("L" & Summary_Table_Row).Value = Stock_Vol
 Summary_Table_Row = Summary_Table_Row + 1
 
-Stock_Vol = 0
 
 Else
-Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
+
+Stock_Vol = Stock_Vol + Cells(i, 7).Value
 
 End If
 
@@ -35,3 +58,4 @@ Next i
 Next ws
 
 End Sub
+
