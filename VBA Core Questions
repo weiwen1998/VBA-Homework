@@ -15,13 +15,14 @@ Summary_Table_Row = 2
 
 Dim OpenP As Double
 Dim CloseP As Double
+Dim Start As Double
+
 
 OpenP = 0
 CloseP = 0
 
 lastrow = ws.Cells(Rows.Count, "A").End(xlUp).Row
 
-OpenP = ws.Cells(2, 3).Value
 
 For i = 2 To lastrow
 
@@ -31,11 +32,20 @@ Ticker = ws.Cells(i, 1).Value
 
 Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
 
-CloseP = ws.Cells(i, 6)
+Start = 2
+OpenP = ws.Cells(Start, 3)
 
-Change = CloseP - OpenP
+If ws.Cells(Start, 3) = 0 Then
+    For OpenP = 2 To i
+        If ws.Cells(OpenP, 3).Value <> 0 Then
+        Start = OpenP
+    Exit For
+    End If
+    Next OpenP
+End If
+
+Change = ws.Cells(i, 6) - ws.Cells(Start, 3)
 PercentChange = Change / OpenP * 100
-
 
 ws.Range("I" & Summary_Table_Row).Value = Ticker
 ws.Range("J" & Summary_Table_Row).Value = Change
@@ -49,7 +59,6 @@ Stock_Vol = 0
 
 Else
 Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
-
 
 End If
 
