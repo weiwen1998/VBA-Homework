@@ -35,7 +35,6 @@ Change = CloseP - OpenP
 PercentChange = Change / OpenP * 100
 
 
-
 ws.Range("I" & Summary_Table_Row).Value = Ticker
 ws.Range("J" & Summary_Table_Row).Value = Change
 ws.Range("K" & Summary_Table_Row).Value = PercentChange
