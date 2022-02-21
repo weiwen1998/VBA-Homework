@@ -16,12 +16,14 @@ Summary_Table_Row = 2
 Dim OpenP As Double
 Dim CloseP As Double
 Dim Start As Double
-
+Dim Find As Double
 
 OpenP = 0
 CloseP = 0
 
 lastrow = ws.Cells(Rows.Count, "A").End(xlUp).Row
+
+Start = 2
 
 
 For i = 2 To lastrow
@@ -32,20 +34,25 @@ Ticker = ws.Cells(i, 1).Value
 
 Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
 
-Start = 2
 OpenP = ws.Cells(Start, 3)
 
-If ws.Cells(Start, 3) = 0 Then
-    For OpenP = 2 To i
-        If ws.Cells(OpenP, 3).Value <> 0 Then
-        Start = OpenP
+CloseP = ws.Cells(i, 6)
+
+
+If OpenP = 0 Then
+    For Find = 2 To i
+        If ws.Cells(Find, 3).Value <> 0 Then
+        Start = Find
     Exit For
     End If
-    Next OpenP
+    Next Find
 End If
 
-Change = ws.Cells(i, 6) - ws.Cells(Start, 3)
+Change = CloseP - OpenP
+
+If OpenP <> 0 Then
 PercentChange = Change / OpenP * 100
+End If
 
 ws.Range("I" & Summary_Table_Row).Value = Ticker
 ws.Range("J" & Summary_Table_Row).Value = Change
@@ -56,16 +63,18 @@ Summary_Table_Row = Summary_Table_Row + 1
 
 Stock_Vol = 0
 
+Start = i + 1
 
 Else
 Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
+
 
 End If
 
 If ws.Range("J" & Summary_Table_Row) >= 0 Then
 ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
 
-Else
+ElseIf ws.Range("J" & Summary_Table_Row) < 0 Then
 ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
 
 End If
@@ -75,3 +84,4 @@ Next i
 Next ws
 
 End Sub
+
