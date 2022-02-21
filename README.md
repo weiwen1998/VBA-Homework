@@ -30,7 +30,7 @@
 
 #Formulas are set for yearly change and percentage change.
 
-#The location of the four variables (Ticker, Yearly Change, Percentage Change and Stock Volume) are set in the Summary Table.
+#The location of the four variables (Ticker, Yearly Change, Percentage Change and Stock Volume) are set in the Summary Table. We ensure that the Percentage Change is in a percentage value.
 
 #The variables are then reset to start the entire loop again.
 
