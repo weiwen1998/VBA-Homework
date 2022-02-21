@@ -34,4 +34,4 @@
 
 #The variables are then reset to start the entire loop again.
 
-#The colours of Yearly Change are set to red if less than 0 or green if 0 or above.
+#The colours of Yearly Change are set to red if less than 0 or green if more than zero. If it is zero, it is set to white.
