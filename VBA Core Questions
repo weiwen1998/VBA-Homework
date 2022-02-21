@@ -16,7 +16,7 @@ Summary_Table_Row = 2
 Dim OpenP As Double
 Dim CloseP As Double
 Dim Start As Double
-Dim Inv As Double
+Dim Loc As Double
 
 ws.Range("I1").Value = "Ticker"
 ws.Range("J1").Value = "Yearly Change"
@@ -45,12 +45,12 @@ CloseP = ws.Cells(i, 6)
 
 
 If OpenP = 0 Then
-    For Inv = 2 To i
+    For Loc = 2 To i
         If ws.Cells(Find, 3).Value <> 0 Then
-        Start = Inv
+        Start = Loc
     Exit For
     End If
-    Next Inv
+    Next Loc
 End If
 
 Change = CloseP - OpenP
@@ -76,11 +76,12 @@ Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
 
 End If
 
-If ws.Range("J" & Summary_Table_Row) >= 0 Then
-ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
 
-ElseIf ws.Range("J" & Summary_Table_Row) < 0 Then
-ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
+If ws.Range("J" & Summary_Table_Row) >= 0 Then
+    ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
+
+    ElseIf ws.Range("J" & Summary_Table_Row) < 0 Then
+    ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
 
 End If
 
@@ -89,18 +90,3 @@ Next i
 Next ws
 
 End Sub
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
