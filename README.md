@@ -20,7 +20,7 @@
 
 #The starting value is then equal to 2 to locate the opening price.
 
-# For the location of the entire table
+#For the location of the entire table:
 
 #If the tickers do not match between rows connected to each other, we set the location of the ticker and the stock volume (first and last columns of the summary table)
 
