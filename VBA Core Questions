@@ -56,12 +56,15 @@ End If
 Change = CloseP - OpenP
 
 If OpenP <> 0 Then
-PercentChange = Change / OpenP * 100
+PercentChange = Change / OpenP
+
+
 End If
 
 ws.Range("I" & Summary_Table_Row).Value = Ticker
 ws.Range("J" & Summary_Table_Row).Value = Change
 ws.Range("K" & Summary_Table_Row).Value = PercentChange
+ws.Range("K" & Summary_Table_Row).NumberFormat = "0.00%"
 ws.Range("L" & Summary_Table_Row).Value = Stock_Vol
 
 Summary_Table_Row = Summary_Table_Row + 1
@@ -77,11 +80,14 @@ Stock_Vol = Stock_Vol + ws.Cells(i, 7).Value
 End If
 
 
-If ws.Range("J" & Summary_Table_Row) >= 0 Then
+If ws.Range("J" & Summary_Table_Row) > 0 Then
     ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 4
 
     ElseIf ws.Range("J" & Summary_Table_Row) < 0 Then
     ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 3
+    
+    Else
+    ws.Range("J" & Summary_Table_Row).Interior.ColorIndex = 2
 
 End If
 
