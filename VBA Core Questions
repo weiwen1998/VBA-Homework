@@ -16,7 +16,12 @@ Summary_Table_Row = 2
 Dim OpenP As Double
 Dim CloseP As Double
 Dim Start As Double
-Dim Find As Double
+Dim Inv As Double
+
+ws.Range("I1").Value = "Ticker"
+ws.Range("J1").Value = "Yearly Change"
+ws.Range("K1").Value = "Percentage Change"
+ws.Range("L1").Value = "Stock Volume"
 
 OpenP = 0
 CloseP = 0
@@ -40,12 +45,12 @@ CloseP = ws.Cells(i, 6)
 
 
 If OpenP = 0 Then
-    For Find = 2 To i
+    For Inv = 2 To i
         If ws.Cells(Find, 3).Value <> 0 Then
-        Start = Find
+        Start = Inv
     Exit For
     End If
-    Next Find
+    Next Inv
 End If
 
 Change = CloseP - OpenP
